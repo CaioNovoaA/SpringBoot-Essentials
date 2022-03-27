@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -36,11 +37,19 @@ public class AnimeController {
     @PostMapping
     public ResponseEntity<Anime> save(@RequestBody Anime anime){
 
-        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+        animeService.save(anime);
+
+        return ResponseEntity.ok(anime);
     }
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void>delete(@PathVariable long id){
         animeService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @Transactional
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Void>replace(@RequestBody Anime anime){
+        animeService.replace(anime);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
