@@ -11,15 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Builder
 public class Anime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String name;
 
+    @Deprecated
+    public Anime() {
+    }
 
+    public Anime(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
