@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class AnimeController {
     }
     @Transactional
     @PostMapping
-    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody anime){
+    public ResponseEntity<Anime> save(@RequestBody @Valid AnimePostRequestBody anime){
 
         animeService.save(anime);
         return ResponseEntity.ok().build();
