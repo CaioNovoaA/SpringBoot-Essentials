@@ -23,6 +23,9 @@ public class AnimeService {
     private static List<Anime> animes;
     private final AnimeRepository animeRepository;
 
+    public  List<Anime> listAllNonpageable() {
+        return animeRepository.findAll();
+    }
 
     public Page<Anime> ListAll(Pageable pageable) {return animeRepository.findAll(pageable);}
     public List<Anime> findByName(String name) {return animeRepository.findByName(name);}
@@ -48,4 +51,6 @@ public class AnimeService {
         anime.setId(savedAnime.getId());
         animeRepository.save(anime);
     }
+
+
 }
