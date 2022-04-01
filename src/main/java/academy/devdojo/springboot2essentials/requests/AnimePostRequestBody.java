@@ -14,14 +14,15 @@ import javax.validation.constraints.NotEmpty;
 public class AnimePostRequestBody {
    @NotEmpty(message = "The anime name cannot be empty") @NotBlank(message = "the anime cannot be blank")
    private String name;
-
+   private String url;
 
     @Deprecated
     public AnimePostRequestBody() {
     }
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)// Gera Json da propriedade quando tem apenas um campo
-    public AnimePostRequestBody(String name) {
+    public AnimePostRequestBody(String name, String url) {
         this.name = name;
+        this.url = url;
     }
 
     public String getName() {

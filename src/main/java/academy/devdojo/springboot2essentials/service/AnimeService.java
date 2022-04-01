@@ -7,6 +7,8 @@ import academy.devdojo.springboot2essentials.repository.AnimeRepository;
 import academy.devdojo.springboot2essentials.requests.AnimePostRequestBody;
 import academy.devdojo.springboot2essentials.requests.AnimePostRequestBodyResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ public class AnimeService {
     private final AnimeRepository animeRepository;
 
 
-    public List<Anime> ListAll() {return animeRepository.findAll();}
+    public Page<Anime> ListAll(Pageable pageable) {return animeRepository.findAll(pageable);}
     public List<Anime> findByName(String name) {return animeRepository.findByName(name);}
 
     public Anime findbyidOrThrowBadRequestException(Long id) {
@@ -33,7 +35,6 @@ public class AnimeService {
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
         Anime anime = animePostRequestBody.toModel();
-
         return animeRepository.save(anime);
     }
 
