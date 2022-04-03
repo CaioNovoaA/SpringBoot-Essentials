@@ -22,7 +22,6 @@ public class AnimePostRequestBody {
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)// Gera Json da propriedade quando tem apenas um campo
     public AnimePostRequestBody(String name, String url) {
         this.name = name;
-        this.url = url;
     }
 
     public String getName() {
